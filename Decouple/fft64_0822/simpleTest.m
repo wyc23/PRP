@@ -1,6 +1,6 @@
 clear,clc
-n_in = 16;
-n_lut = 16;
+n_in = 36;
+n_lut = 4;
 n_out =16;
 
 [lutr, luti] = finalLUT();
