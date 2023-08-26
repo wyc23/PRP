@@ -9,7 +9,6 @@ function [outputr, outputi] = myfft8(realPart, imgPart, LUTrs_1, LUTis_1, N)
             imgPartkEven(m) = imgPart(m) + imgPart(m + 4);
             imgPartkOdd(m) = imgPart(m) - imgPart(m + 4);
         end
-        N = 18;
         mixData = fi([realPartkEven, realPartkOdd, imgPartkEven, imgPartkOdd], 1, N);
         realPartkEven = mixData(:,1);
         realPartkOdd = mixData(:,2);
