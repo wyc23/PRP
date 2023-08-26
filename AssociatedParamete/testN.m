@@ -47,5 +47,5 @@ for N=4:36
 end
 rmse_log = log10(RMSE);
 plot(4:36, rmse_log)
-xlabel("N")
+xlabel("fft8前预处理结果位数")
 ylabel("log10(RMSE)")
