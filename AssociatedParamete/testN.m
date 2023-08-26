@@ -1,4 +1,5 @@
 n_fft8 = 16;
+n_in = 16;
 n_out = 16;
 
 % fft8 LUT
@@ -28,6 +29,9 @@ for N=4:36
     xr = rand(8, 200) - 0.5;
     xi = rand(8, 200) - 0.5;
     x = complex(xr, xi);
+    dataMix = double(fi([xr, xi], 1, n_in));
+    xr = dataMix(:,1:200);
+    xi = dataMix(:,201:400);
     fxr = zeros(8, 200);
     fxi = zeros(8, 200);
     f = zeros(8, 200);
@@ -41,3 +45,7 @@ for N=4:36
     RMSE(N - 3) = sqrt(mean(abs(f - fx).^2, "all"));
     disp(N);
 end
+rmse_log = log10(RMSE);
+plot(4:36, rmse_log)
+xlabel("N")
+ylabel("log10(RMSE)")
