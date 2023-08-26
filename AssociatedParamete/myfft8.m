@@ -1,4 +1,4 @@
-function [outputr, outputi] = myfft8(realPart, imgPart, LUTrs_1, LUTis_1, N)
+function [outputr, outputi] = myfft8(realPart, imgPart, LUTrs_1, LUTis_1, N, w)
         realPartkEven = zeros(4, 1);
         realPartkOdd = zeros(4, 1);
         imgPartkEven = zeros(4, 1);
@@ -34,13 +34,22 @@ function [outputr, outputi] = myfft8(realPart, imgPart, LUTrs_1, LUTis_1, N)
             % index1 = bin2dec(qualifiedData1(:,t)');
             % index2 = bin2dec(qualifiedData2(:,t)');
             fr = fr + LUTrs_1(index + 1, k + 1) * 2 ^ -realPartkEven.FractionLength;
+            if (w > 0)
+                fr = double(fi(fr, 1, w));
+            end
             % fr = fr + (LUTrs_1(index1 + 1, k + 1) + (-1)^k * LUTrs_1(index2 + 1, k + 1)) * 2 ^ -realPart.FractionLength;
             if t == 1
                 fr = fr * (-2);
+                if (w > 0)
+                    fr = double(fi(fr, 1, w));
+                end
             elseif t == N
                 break;
             else
                 fr = fr * 2;
+                if (w > 0)
+                    fr = double(fi(fr, 1, w));
+                end
             end
         end
         end
@@ -64,13 +73,22 @@ function [outputr, outputi] = myfft8(realPart, imgPart, LUTrs_1, LUTis_1, N)
             % index1 = bin2dec(qualifiedData1(:,t)');
             % index2 = bin2dec(qualifiedData2(:,t)');
             f_i = f_i + LUTis_1(index1 + 1, k + 1) * 2 ^ -imgPartkEven.FractionLength;
+            if (w > 0)
+                f_i = double(fi(f_i, 1, w));
+            end
             % f_i = f_i + (LUTis_1(index1 + 1, k + 1) + (-1)^k * LUTis_1(index2 + 1, k + 1)) * 2 ^ -imgPart.FractionLength;
             if t == 1
                 f_i = f_i * (-2);
+                if (w > 0)
+                    f_i = double(fi(f_i, 1, w));
+                end
             elseif t == N
                 break;
             else
                 f_i = f_i * 2;
+                if (w > 0)
+                    f_i = double(fi(f_i, 1, w));
+                end
             end
         end
         end
