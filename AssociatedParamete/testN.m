@@ -25,8 +25,8 @@ fft8_luti = double(fi(fft8_luti * factor_fft8, 1, n_fft8, n_fft8));
 RMSE = zeros(33,1);
 
 for N=4:36
-    xr = zeros(8, 200);
-    xi = zeros(8, 200);
+    xr = rand(8, 200) - 0.5;
+    xi = rand(8, 200) - 0.5;
     x = complex(xr, xi);
     fxr = zeros(8, 200);
     fxi = zeros(8, 200);
@@ -39,4 +39,5 @@ for N=4:36
     fxi = fi(fxi./factor_fft8, 1, n_out);
     fx = complex(double(fxr), double(fxi));
     RMSE(N - 3) = sqrt(mean(abs(f - fx).^2, "all"));
+    disp(N);
 end
